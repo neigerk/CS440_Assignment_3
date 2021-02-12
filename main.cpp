@@ -8,6 +8,10 @@ void CreateIndex();
 void LookupRecord(string id);
 
 int main(int argc, char const *argv[]) {
+  cout << "argc: " << argc << "\n";
+  for (int i = 0; i < argc; i++){
+    cout << "argv[" << i << "]:   " << argv[i] << "\n";
+  }
   if (argc = 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
   } else {
