@@ -34,7 +34,7 @@ Record::Record(std::string line){
 
 }
 
-Record::printRecord(){
+void Record::printRecord(){
   cout << "id: " << id << "\n";
   cout << "name: " << name << "\n";
   cout << "bio: " << bio << "\n";

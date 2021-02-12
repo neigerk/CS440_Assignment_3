@@ -8,7 +8,7 @@ public:
   Record();
   Record(std::string id, std::string name, std::string bio, std::string manager_id);
   Record(std::string line);
-  printRecord();
+  void printRecord();
   std::string toString();
   int nameLength();
   int bioLength();
