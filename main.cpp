@@ -1,12 +1,11 @@
 
 #include <fstream>
 #include <iostream>
+#include <string>
 #include <string.h>
 #include "main.h"
 #include "record.h"
-
-
-
+#include "block.h"
 
 using namespace std;
 
@@ -39,6 +38,7 @@ int main(int argc, char const *argv[]) {
 
 
 void CreateIndex(){
+  //This is all just test/experimentation code.  Please ignore
   cout << "This is where the index creation happens. Not yet implemented.\n";
   ofstream outfile;
   outfile.open("EmployeeIndex");
@@ -52,6 +52,10 @@ void CreateIndex(){
   while(getline(infile,line)){
       outfile << line << "\n";
   }
+  outfile.seekp(0);
+  outfile << "hi";
+  Block testBlock = Block(3);
+  cout << testBlock.metadata();
 
   outfile.close();
   infile.close();
