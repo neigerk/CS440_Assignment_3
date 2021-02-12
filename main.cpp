@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]) {
     cout << "argv[" << i << "]:   " << argv[i] << "\n";
   }
 
-  if (argc = 1){
+  if (argc == 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
   } else {
     cout << argv[1];
