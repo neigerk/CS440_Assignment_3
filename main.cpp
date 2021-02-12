@@ -46,7 +46,7 @@ void CreateIndex(){
   infile.open("Employees.csv");
   Record testrecord = Record("11111111,Kevin Neiger,This is a bio,99999999");
   cout << "Length of record: " << testrecord.recordLength() << "\n";
-  testrecord.print();
+  testrecord.printRecord();
   cout << testrecord.toString();
   string line;
   while(getline(infile,line)){
