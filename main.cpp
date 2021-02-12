@@ -11,6 +11,7 @@ int main(int argc, char const *argv[]) {
   if (argc = 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
   } else {
+    cout << argv[1];
     if (*argv[1] == 'C'){
       CreateIndex();
     } else if(*argv[1] == 'L'){
@@ -18,7 +19,7 @@ int main(int argc, char const *argv[]) {
       //string*argv[2];
       LookupRecord(argv[2]);
     } else {
-      cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
+
     }
   }
 
