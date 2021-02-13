@@ -13,6 +13,7 @@ public:
   int nameLength();
   int bioLength();
   int recordLength();
+  std::string getId();
 
 
 

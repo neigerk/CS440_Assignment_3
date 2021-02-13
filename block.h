@@ -13,15 +13,18 @@ const int MAXRECORDS = 5;
 
 class Block {
 public:
+  Block();
   Block(int num);
-  Block(int num, std::ifstream* file);
-  void EmptyBlock(std::ofstream* output);
-  void WriteBlock(std::ofstream* output);
+  //Block(int num, std::ifstream* file);
+  void EmptyBlock();
+  void WriteBlock();
+  // void EmptyBlock(std::ofstream* output);
+  // void WriteBlock(std::ofstream* output);
   std::string toString();
-  void InsertRecord(std::string str);
+  int InsertRecord(std::string str);
+  int InsertRecord(Record rec);
   std::string metadataString();
 
-private:
 
   //metadata
   int blockNumber;
@@ -32,8 +35,12 @@ private:
   //Records
   Record records[MAXRECORDS];
 
+private:
+
+
 };
 
+void SplitRecords(Block split, Block newblock, int key, int level);
 //Block ReadBlock(int num, std::ifstream* file);
 
 #endif

@@ -1,5 +1,9 @@
 #include <iostream>
 #include "record.h"
+//#include "GlobalVariables.h"
+extern std::ofstream empOut;
+extern std::ifstream empIn;
+extern std::ifstream csvIn;
 
 using namespace std;
 
@@ -55,4 +59,7 @@ int Record::bioLength(){
 }
 int Record::recordLength(){
   return (name.length() + bio.length() + id.length() + manager_id.length());
+}
+std::string Record::getId(){
+  return id;
 }

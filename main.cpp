@@ -6,8 +6,14 @@
 #include "main.h"
 #include "record.h"
 #include "block.h"
-
+#include "bucket.h"
+//#include "GlobalVariables.h"
 using namespace std;
+
+std::ofstream empOut;
+std::ifstream empIn;
+std::ifstream csvIn;
+int blockCount = 0;
 
 int main(int argc, char const *argv[]) {
   //argument counts
@@ -40,12 +46,23 @@ int main(int argc, char const *argv[]) {
 void CreateIndex(){
   //This is all just test/experimentation code.  Please ignore
   cout << "This is where the index creation happens. Not yet implemented.\n";
-  ofstream empOut;
   empOut.open("EmployeeIndex");
-  ifstream empIn;
   empIn.open("EmployeeIndex");
-  ifstream csvIn;
   csvIn.open("Employees.csv");
+
+  //Create BucketIndex
+  BucketIndex index = BucketIndex();
+  //Record testrecord = Record("11111111,Kevin Neiger,This is a bio,99999999\n");
+  //cout << testrecord.getId();
+  //index.Insert(testrecord);
+  Record newrecord;
+  string line;
+  while(getline(csvIn, line)){
+    newrecord = Record(line);
+    index.Insert(newrecord);
+  }
+
+  /*
   //Record testrecord = Record("11111111,Kevin Neiger,This is a bio,99999999");
   //cout << "Length of record: " << testrecord.recordLength() << "\n";
   //testrecord.printRecord();
@@ -82,7 +99,7 @@ void CreateIndex(){
   //file.open("EmployeeIndex");
   //cout <<"\n\n\n";
   //Block test2 = Block(0, &file);
-
+*/
   empOut.close();
   empIn.close();
   csvIn.close();
