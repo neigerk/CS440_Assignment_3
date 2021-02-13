@@ -6,22 +6,34 @@
 #include <iostream>
 #include "record.h"
 
+const int BLOCKSIZE = 4096;
+const int MAXRECORDS = 5;
+//const int recordSize = 720;
+//const int headerlength = 30;
+
 class Block {
 public:
   Block(int num);
-  //void EmptyBlock(ofstream output);
-  //void InsertRecord(Record rec);
-  std::string metadata();
+  Block(int num, std::ifstream* file);
+  void EmptyBlock(std::ofstream* output);
+  void WriteBlock(std::ofstream* output);
+  std::string toString();
+  void InsertRecord(std::string str);
+  std::string metadataString();
 
 private:
 
-  const int headerlength = 30;
-  const int recordSize = 720;
   //metadata
-  int numRecords;
-  bool filledRecords[5];
   int blockNumber;
   int overflow;
+  int numRecords;
+  int bytes;
+
+  //Records
+  Record records[MAXRECORDS];
+
 };
+
+//Block ReadBlock(int num, std::ifstream* file);
 
 #endif

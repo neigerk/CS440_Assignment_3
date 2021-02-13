@@ -40,25 +40,52 @@ int main(int argc, char const *argv[]) {
 void CreateIndex(){
   //This is all just test/experimentation code.  Please ignore
   cout << "This is where the index creation happens. Not yet implemented.\n";
-  ofstream outfile;
-  outfile.open("EmployeeIndex");
-  ifstream infile;
-  infile.open("Employees.csv");
-  Record testrecord = Record("11111111,Kevin Neiger,This is a bio,99999999");
-  cout << "Length of record: " << testrecord.recordLength() << "\n";
-  testrecord.printRecord();
-  cout << testrecord.toString();
+  ofstream empOut;
+  empOut.open("EmployeeIndex");
+  ifstream empIn;
+  empIn.open("EmployeeIndex");
+  ifstream csvIn;
+  csvIn.open("Employees.csv");
+  //Record testrecord = Record("11111111,Kevin Neiger,This is a bio,99999999");
+  //cout << "Length of record: " << testrecord.recordLength() << "\n";
+  //testrecord.printRecord();
+  //cout << testrecord.toString();
+  Block testBlock = Block(0);
+  //cout << testBlock.metadataString();
   string line;
-  while(getline(infile,line)){
-      outfile << line << "\n";
+  for (int i = 0; i < MAXRECORDS; i++){
+    getline(csvIn, line);
+    testBlock.InsertRecord(line);
   }
-  outfile.seekp(0);
-  outfile << "hi";
-  Block testBlock = Block(3);
-  cout << testBlock.metadata();
+  //cout << testBlock.toString();
+  testBlock.WriteBlock(&empOut);
+  testBlock = Block(1);
+  for (int i = 0; i < MAXRECORDS; i++){
+    getline(csvIn, line);
+    testBlock.InsertRecord(line);
+  }
+  //cout << testBlock.toString();
+  testBlock.WriteBlock(&empOut);
 
-  outfile.close();
-  infile.close();
+  testBlock = Block(1, &empIn);
+  cout << testBlock.toString();
+
+  //while(getline(infile,line)){
+  //    outfile << line << "\n";
+  //}
+  //outfile.seekp(0);
+  //outfile << "hi";
+  //Block testBlock = Block(0);
+  //testBlock.EmptyBlock(&outfile);
+  //cout << testBlock.metadataString();
+  //ifstream file;
+  //file.open("EmployeeIndex");
+  //cout <<"\n\n\n";
+  //Block test2 = Block(0, &file);
+
+  empOut.close();
+  empIn.close();
+  csvIn.close();
 }
 
 void LookupRecord(std::string id){
