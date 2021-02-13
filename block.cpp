@@ -19,7 +19,7 @@ Block::Block()
 //Read a block from the file
 Block::Block(int num){
   empIn.seekg(0);
-  //empIn.seekg(num * BLOCKSIZE);
+  empIn.seekg(num * BLOCKSIZE);
   char s[BLOCKSIZE];
   //std::printf("Contents of s:\n%s\n", s);
   empIn.get(s, BLOCKSIZE, '$');
