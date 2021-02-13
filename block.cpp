@@ -32,6 +32,7 @@ Block::Block(int num){
 
   getline(ss, line);
   std::cout << num << "\n";
+  std::cout << ss.str();
   blockNumber = stoi(line);
   //std::cout << "After stoi\n";
 
