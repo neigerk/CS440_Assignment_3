@@ -56,12 +56,6 @@ void CreateIndex(){
   bucketfile << index.toString();
   bucketfile.close();
 
-  std::ifstream bucketread;
-  bucketread.open("BucketFile");
-  BucketIndex readindex = BucketIndex(&bucketread);
-  readindex.FindRecord("11432123");
-  bucketread.close();
-
   empOut.close();
   empIn.close();
   csvIn.close();
@@ -71,7 +65,7 @@ void LookupRecord(std::string id){
   std::ifstream bucketread;
   bucketread.open("BucketFile");
   BucketIndex readindex = BucketIndex(&bucketread);
-  readindex.FindRecord("11432123");
+  readindex.FindRecord(id);
   bucketread.close();
   //cout << "This is where the index creation happens. Not yet implemented.\n";
 }
