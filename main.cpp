@@ -23,14 +23,15 @@ int main(int argc, char const *argv[]) {
   if (argc == 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
     //CreateIndex();
+    empOut.close();
+    empInd.close();
+    csvIn.close();
   } else {
     if (strcmp(argv[1], "-C") == 0){
       CreateIndex();
     } else if(strcmp(argv[1], "-L") == 0){
       LookupRecord(argv[2]);
-    } else {
-
-    }
+    } else {}
   }
 
   return 0;
