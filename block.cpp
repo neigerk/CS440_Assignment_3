@@ -67,13 +67,6 @@ void Block::WriteBlock(){
     ss << '\0';
   }
   empOut << ss.str();
-
-/*
-  if (overflow >= 0){
-    Block block = Block(overflow);
-    block.WriteBlock();
-  }
-  */
 }
 
 
@@ -148,18 +141,7 @@ int Block::InsertRecord(Record rec){
     return 0;
   }
 }
-/*
-int Block::InsertRecord(Record rec){
-  if (numRecords < MAXRECORDS){
-    records[numRecords] = rec;
-    numRecords++;
-    bytes = this->toString().length() + 3;
-    return numRecords;
-  } else if (overflow > -1){
 
-  }
-}
-*/
 std::string Block::metadataString(){
   std::stringstream ss;
   ss << blockNumber << "\n" << overflow << "\n" << numRecords << "\n" << bytes << "\n";
@@ -177,6 +159,28 @@ std::string Block::toString(){
   return ss.str();
   //TODO
 }
+
+void Block::FindRecord(std::string id){
+  int searchid = stoi(id);
+  int found = 0;
+  for (int i = 0; i < numRecords; i++){
+    std::string checkstring = records[i].getId();
+    int checkint = stoi(checkstring);
+    if(searchid == checkint){
+      std::cout << records[i].toString();
+      found++;
+    }
+  }
+  if (found == 0 && overflow > -1){
+    Block of = Block(overflow);
+    of.FindRecord(id);
+
+  } else if (found == 0){
+    std::cout <<  "Couldn't find the requested record.\n";
+  }
+}
+
+
 
 void SplitRecords(Block split, Block newblock, int key, int level){
   for (int i = 0; i < split.numRecords; i++){

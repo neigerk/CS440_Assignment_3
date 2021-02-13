@@ -18,7 +18,8 @@ Bucket::Bucket(){
 
 }
 */
-
+Bucket::Bucket()
+{}
 //Bucket::Bucket(int id, int blockNumber, std::ofstream* empOut){
 Bucket::Bucket(int id){
     this->id = id;
@@ -29,10 +30,20 @@ Bucket::Bucket(int id){
     block.WriteBlock();
 }
 
+Bucket::Bucket(int id, int block){
+    this->id = id;
+    this->blockNumber = block;
+}
+
 void Bucket::InsertRecord(Record rec){
   //std::cout << "Bucket Number " << id << "Points to Block " << blockNumber << "\n";
   Block block = Block(blockNumber);
   block.InsertRecord(rec);
+}
+
+void Bucket::FindRecord(std::string id){
+  Block block = Block(blockNumber);
+  block.FindRecord(id);
 }
 
 Block Bucket::getBlock(){
@@ -40,7 +51,7 @@ Block Bucket::getBlock(){
 }
 std::string Bucket::toString(){
   std::stringstream ss;
-  ss << id << ", " << blockNumber << "\n";
+  ss << id << "\n" << blockNumber << "\n";
   return ss.str();
 }
 
@@ -49,11 +60,34 @@ std::string Bucket::toString(){
 BucketIndex::BucketIndex()
   :N(1), Nlevel(1), Level(0), Next(0), totalRecords(0)
 {
-    //this->csvIn = csvIn;
-    //this->empIn = empIn;
-    //this->empOut = empOut;
     it = Index.begin();
     Index.insert(it, Bucket(0));
+}
+
+BucketIndex::BucketIndex(std::ifstream* bucketfile){
+  std::string line;
+  getline(*bucketfile, line);
+  this->totalRecords = stoi(line);
+  getline(*bucketfile, line);
+  this->N = stoi(line);
+  getline(*bucketfile, line);
+  this->Nlevel = stoi(line);
+  getline(*bucketfile, line);
+  this->Level = stoi(line);
+  getline(*bucketfile, line);
+  this->Next = stoi(line);
+  int i = 0;
+  while(getline(*bucketfile, line)){
+    this->it = Index.begin();
+    int id = stoi(line);
+    getline(*bucketfile, line);
+    int block = stoi(line);
+    Bucket buck = Bucket(id, block);
+    std::cout<< "Id, Block: " << id << ", " << block << "\n";
+    Index.insert(it+i, buck);
+    i++;
+  }
+  std::cout << this->toString();
 }
 
 void BucketIndex::Insert(Record rec){
@@ -65,10 +99,6 @@ void BucketIndex::Insert(Record rec){
     int hlevel = hashed % (power);
     int powerplus = pow(2, Level + 1);
     int hlevelplus = hashed % (powerplus);
-    //std::cout << "Power: " << power <<"\n";
-    // std::cout << "hlevel: " << hlevel << "\n";
-    // std::cout << "Powerplus: " << powerplus <<"\n";
-    // std::cout << "hlevelplus: " << hlevelplus << "\n";
     if (hlevel >= Next && hlevel <= Nlevel){
       Bucket buck = Index[hlevel];
       std::cout<<"Inserting into bucket: "<<hlevel<<"\n";
@@ -116,6 +146,41 @@ void BucketIndex::Insert(Record rec){
       }
     }
 
+}
+
+void BucketIndex::FindRecord(std::string id){
+  std::size_t hashed = Hash(id);
+  int power = pow(2, Level);
+  int hlevel = hashed % (power);
+  int powerplus = pow(2, Level + 1);
+  int hlevelplus = hashed % (powerplus);
+  if (hlevel >= Next && hlevel <= Nlevel){
+    Bucket buck = Index[hlevel];
+    std::cout << "hlevel: " << hlevel << "\n" << buck.toString() << "\n";
+    //std::cout<<"Inserting into bucket: "<<hlevel<<"\n";
+    buck.FindRecord(id);
+  } else {
+    Bucket buck = Index[hlevelplus];
+    std::cout << "hlevelplus: " << hlevelplus << "\n" << buck.toString() << "\n";
+    //std::cout<<"Inserting into bucket p: "<<hlevelplus<<"\n";
+    buck.FindRecord(id);
+  }
+}
+
+std::string BucketIndex::toString(){
+  std::stringstream ss;
+  Bucket buck;
+  int length = Index.size();
+  ss  << totalRecords << "\n"
+      << N << "\n"
+      << Nlevel << "\n"
+      << Level << "\n"
+      << Next  << "\n";
+  for (int i = 0; i < length; i++){
+    buck = Index[i];
+    ss << buck.toString();
+  }
+  return ss.str();
 }
 
 int BucketIndex::getBlockCount(){

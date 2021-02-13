@@ -24,6 +24,7 @@ public:
   int InsertRecord(std::string str);
   int InsertRecord(Record rec);
   std::string metadataString();
+  void FindRecord(std::string id);
 
 
   //metadata

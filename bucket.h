@@ -13,8 +13,11 @@ class Bucket {
 public:
     //Bucket();
     //Bucket(int id, int blockNumber, std::ofstream* empOut);
+    Bucket();
     Bucket(int id);
+    Bucket(int id, int block);
     void InsertRecord(Record rec);
+    void FindRecord(std::string id);
     Block getBlock();
     std::string toString();
 private:
@@ -25,8 +28,11 @@ private:
 class BucketIndex {
 public:
     BucketIndex();
+    BucketIndex(std::ifstream* bucketfile);
     //BucketIndex(std::ifstream* csvIn, std::ifstream* empIn, std::ofstream* empOut);
     void Insert(Record rec);
+    void FindRecord(std::string id);
+    std::string toString();
     int getBlockCount();
     //void AddBucket(int id, int blockNumber, ofstream* empOut);
 private:
@@ -34,9 +40,7 @@ private:
     //std::ifstream* empIn;
     //std::ofstream* empOut;
     int totalRecords;
-    //int blockCount;
     //Algorithm
-    //int numBuckets;
     int N;
     int Nlevel;
     int Level;
