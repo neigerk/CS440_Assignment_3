@@ -65,7 +65,7 @@ void LookupRecord(std::string id){
   std::ifstream bucketread;
   bucketread.open("BucketFile");
   BucketIndex readindex = BucketIndex(&bucketread);
-  readindex.FindRecord(id);
+  readindex.FindRecord("11432123");
   bucketread.close();
   //cout << "This is where the index creation happens. Not yet implemented.\n";
 }
