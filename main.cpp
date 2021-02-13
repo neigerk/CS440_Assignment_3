@@ -16,17 +16,10 @@ std::ifstream csvIn;
 int blockCount = 0;
 
 int main(int argc, char const *argv[]) {
-  //argument counts
-  /*
-  cout << "argc: " << argc << "\n";
-  for (int i = 0; i < argc; i++){
-    cout << "argv[" << i << "]:   " << argv[i] << "\n";
-  }
-  */
 
   if (argc == 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
-    //CreateIndex();
+    CreateIndex();
   } else {
     if (strcmp(argv[1], "-C") == 0){
       CreateIndex();
@@ -63,7 +56,11 @@ void CreateIndex(){
   bucketfile << index.toString();
   bucketfile.close();
 
-
+  td::ifstream bucketread;
+  bucketread.open("BucketFile");
+  BucketIndex readindex = BucketIndex(&bucketread);
+  readindex.FindRecord("11432123");
+  bucketread.close();
 
   empOut.close();
   empIn.close();

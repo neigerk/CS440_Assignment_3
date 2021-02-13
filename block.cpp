@@ -64,7 +64,7 @@ void Block::WriteBlock(){
   //Write to stream
   ss << str;
   for (int i = 0; i < nulls; i++){
-    ss << '\0';
+    ss << ' ';
   }
   empOut << ss.str();
 }
