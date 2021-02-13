@@ -42,6 +42,7 @@ void Bucket::InsertRecord(Record rec){
 }
 
 void Bucket::FindRecord(std::string id){
+  std::cout << "Finding record(bucket): " << id << "\n";
   Block block = Block(blockNumber);
   block.FindRecord(id);
 }
@@ -149,6 +150,7 @@ void BucketIndex::Insert(Record rec){
 }
 
 void BucketIndex::FindRecord(std::string id){
+  std::cout << "Finding record(Index): " << id << "\n";
   std::size_t hashed = Hash(id);
   int power = pow(2, Level);
   int hlevel = hashed % (power);

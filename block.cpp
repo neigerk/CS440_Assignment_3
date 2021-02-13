@@ -161,7 +161,7 @@ std::string Block::toString(){
 }
 
 void Block::FindRecord(std::string id){
-  std::cout << "Finding record: " << id << "\n";
+  std::cout << "Finding record(block): " << id << "\n";
   int searchid = stoi(id);
   int found = 0;
   for (int i = 0; i < numRecords; i++){
