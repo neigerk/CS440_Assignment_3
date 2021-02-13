@@ -44,6 +44,7 @@ void Bucket::InsertRecord(Record rec){
 void Bucket::FindRecord(std::string id){
   std::cout << "Finding record(bucket): " << id << "\n";
   Block block = Block(blockNumber);
+  std::cout << "After block creation\n";
   block.FindRecord(id);
 }
 
