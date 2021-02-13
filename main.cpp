@@ -22,13 +22,11 @@ int main(int argc, char const *argv[]) {
 
   if (argc == 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
-    CreateIndex();
+    //CreateIndex();
   } else {
     if (strcmp(argv[1], "-C") == 0){
       CreateIndex();
     } else if(strcmp(argv[1], "-L") == 0){
-      //string id;
-      //string*argv[2];
       LookupRecord(argv[2]);
     } else {
 
@@ -41,11 +39,6 @@ int main(int argc, char const *argv[]) {
 
 void CreateIndex(){
   //This is all just test/experimentation code.  Please ignore
-  //cout << "This is where the index creation happens. Not yet implemented.\n";
-  //empOut.open("EmployeeIndex");
-  //empIn.open("EmployeeIndex");
-  //csvIn.open("Employees.csv");
-
   //Create BucketIndex
   BucketIndex index = BucketIndex();
   Record newrecord;

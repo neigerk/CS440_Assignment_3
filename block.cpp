@@ -31,7 +31,7 @@ Block::Block(int num){
   //std::cout << "Before stoi\n";
 
   getline(ss, line);
-  //std::cout << num << "\n";
+  std::cout << num << "\n";
   blockNumber = stoi(line);
   //std::cout << "After stoi\n";
 
@@ -83,10 +83,6 @@ void Block::EmptyBlock(){
   empOut << ss.str();
 }
 
-
-//Returns 1 if the entry was added
-//Returns 0 if a new overflow block was added
-//Returns 2 if it was added to overflow
 int Block::InsertRecord(std::string str){
   // std::cout << "Inserting a record\n";
   if (numRecords < MAXRECORDS){
