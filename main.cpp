@@ -48,6 +48,7 @@ void CreateIndex(){
     newrecord = Record(line);
     index.Insert(newrecord);
   }
+  //Write bucketFile
   std::ofstream bucketfile;
   bucketfile.open("BucketFile");
   bucketfile << index.toString();
@@ -59,6 +60,7 @@ void CreateIndex(){
   readindex.FindRecord("11432123");
   bucketread.close();
 
+  //Close global file accessors
   empOut.close();
   empIn.close();
   csvIn.close();
@@ -69,7 +71,8 @@ void LookupRecord(std::string id){
   bucketread.open("BucketFile");
   BucketIndex readindex = BucketIndex(&bucketread);
   bucketread.close();
-  readindex.FindRecord("11432123");
+  std::cout << Block(0).toString();
+  //readindex.FindRecord("11432123");
 
 
   empOut.close();
