@@ -18,6 +18,7 @@ Block::Block()
 {}
 //Read a block from the file
 Block::Block(int num){
+  empIn.open(EmployeeIndex);
   empIn.seekg(num * BLOCKSIZE);
   char s[BLOCKSIZE];
   //std::printf("Contents of s:\n%s\n", s);
