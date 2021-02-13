@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]) {
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
     //CreateIndex();
     empOut.close();
-    empInd.close();
+    empIn.close();
     csvIn.close();
   } else {
     if (strcmp(argv[1], "-C") == 0){
@@ -68,8 +68,9 @@ void LookupRecord(std::string id){
   std::ifstream bucketread;
   bucketread.open("BucketFile");
   BucketIndex readindex = BucketIndex(&bucketread);
-  readindex.FindRecord("11432123");
   bucketread.close();
+  readindex.FindRecord("11432123");
+
 
   empOut.close();
   empIn.close();
