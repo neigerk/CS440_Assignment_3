@@ -29,13 +29,8 @@ Block::Block(int num){
   ss << str;
   std::string line;
 
-  //std::cout << "Before stoi\n";
-
   getline(ss, line);
-  std::cout << num << "\n";
-  std::cout << ss.str();
   blockNumber = stoi(line);
-  //std::cout << "After stoi\n";
 
   getline(ss, line);
   overflow = stoi(line);
@@ -51,8 +46,6 @@ Block::Block(int num){
     records[i] = Record(line);
     i++;
   }
-  // std::cout << "Finished Reading a Block\n";
-
 }
 
 
@@ -159,7 +152,6 @@ std::string Block::toString(){
 }
 
 void Block::FindRecord(std::string id){
-  std::cout << "Finding record(block): " << id << "\n";
   int searchid = stoi(id);
   int found = 0;
   for (int i = 0; i < numRecords; i++){

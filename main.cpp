@@ -20,11 +20,6 @@ int main(int argc, char const *argv[]) {
 
   if (argc == 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
-    //CreateIndex();
-    //LookupRecord("11111111");
-    //empOut.close();
-    //empIn.close();
-    //csvIn.close();
   } else {
     if (strcmp(argv[1], "-C") == 0){
       CreateIndex();
@@ -66,6 +61,7 @@ void CreateIndex(){
   empOut.close();
   empIn.close();
   csvIn.close();
+  std::cout << "Employee Index successfully create.\n";
 }
 
 void LookupRecord(std::string id){
@@ -74,6 +70,7 @@ void LookupRecord(std::string id){
   std::ifstream bucketread;
   bucketread.open("BucketFile");
   BucketIndex readindex = BucketIndex(&bucketread);
+  std::cout << "Finding Record: " << id << "\n";
   readindex.FindRecord(id);
   bucketread.close();
 
