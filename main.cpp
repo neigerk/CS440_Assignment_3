@@ -51,12 +51,6 @@ void CreateIndex(){
   bucketfile << index.toString();
   bucketfile.close();
 
-  std::ifstream bucketread;
-  bucketread.open("BucketFile");
-  BucketIndex readindex = BucketIndex(&bucketread);
-  readindex.FindRecord("11432123");
-  bucketread.close();
-
   //Close global file accessors
   empOut.close();
   empIn.close();
