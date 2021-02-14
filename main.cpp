@@ -21,9 +21,10 @@ int main(int argc, char const *argv[]) {
   if (argc == 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
     //CreateIndex();
-    empOut.close();
-    empIn.close();
-    csvIn.close();
+    //LookupRecord("11111111");
+    //empOut.close();
+    //empIn.close();
+    //csvIn.close();
   } else {
     if (strcmp(argv[1], "-C") == 0){
       CreateIndex();
@@ -68,19 +69,14 @@ void CreateIndex(){
 }
 
 void LookupRecord(std::string id){
-  empOut.open("EmployeeIndex");
   empIn.open("EmployeeIndex");
-  csvIn.open("Employees.csv");
+
   std::ifstream bucketread;
   bucketread.open("BucketFile");
   BucketIndex readindex = BucketIndex(&bucketread);
+  readindex.FindRecord(id);
   bucketread.close();
-  std::cout << Block(0).toString();
-  //readindex.FindRecord("11432123");
 
-
-  empOut.close();
   empIn.close();
-  csvIn.close();
-  //cout << "This is where the index creation happens. Not yet implemented.\n";
+
 }
