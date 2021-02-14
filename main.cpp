@@ -16,9 +16,7 @@ std::ifstream csvIn;
 int blockCount = 0;
 
 int main(int argc, char const *argv[]) {
-  empOut.open("EmployeeIndex");
-  empIn.open("EmployeeIndex");
-  csvIn.open("Employees.csv");
+
 
   if (argc == 1){
     cout << "No function selected.\n -C Index Creation\n -L <ID> Lookup Record from ID\n";
@@ -41,6 +39,9 @@ int main(int argc, char const *argv[]) {
 void CreateIndex(){
   //This is all just test/experimentation code.  Please ignore
   //Create BucketIndex
+  empOut.open("EmployeeIndex");
+  empIn.open("EmployeeIndex");
+  csvIn.open("Employees.csv");
   BucketIndex index = BucketIndex();
   Record newrecord;
   string line;
@@ -67,6 +68,9 @@ void CreateIndex(){
 }
 
 void LookupRecord(std::string id){
+  empOut.open("EmployeeIndex");
+  empIn.open("EmployeeIndex");
+  csvIn.open("Employees.csv");
   std::ifstream bucketread;
   bucketread.open("BucketFile");
   BucketIndex readindex = BucketIndex(&bucketread);
