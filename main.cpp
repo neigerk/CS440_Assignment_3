@@ -1,3 +1,4 @@
+// Compile: g++ -std=c++11 main.cpp block.cpp record.cpp bucket.cpp -o main.out
 
 #include <fstream>
 #include <iostream>
