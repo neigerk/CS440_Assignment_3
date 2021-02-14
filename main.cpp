@@ -38,7 +38,7 @@ void CreateIndex(){
   //Create BucketIndex
   empOut.open("EmployeeIndex");
   empIn.open("EmployeeIndex");
-  csvIn.open("Employees.csv");
+  csvIn.open("Employee.csv");
   BucketIndex index = BucketIndex();
   Record newrecord;
   string line;
